@@ -1,47 +1,50 @@
 # trainer-api
 Trainer API using Spring Boot
 
-Esta API consiste en 3 enpoints:
-* Crear trainer
-* Listar un trainer determinado según el id recibido por parámetro.
-* Listar todos los trainers creados.
+This API has 3 endpoints:
+* Create trainer
+* List a trainer according to the received id parameter .
+* List all the created trainers.
 
-Para poder utilizar la api de forma local tenemos que seguir los siguientes pasos:
+In order to use this API as local way, you have to follow these steps:
 
-1) Instalar: JDK 17, maven y MySQL
+1) Install: JDK 17, Maven and MySQL
 
-2) Crear una base de datos MySql vacía llamada Trainer. La base de datos debe estar disponible en el puerto 3306.
-Para cualquier otra configuración se debe editar el archivo api-trainer/src/main/resources/application.properties
+2) Create an empty MySql data base called "Trainer". The data base has to be available in the 3306 port.
+For any other configuration, we can edit the pi-trainer/src/main/resources/application.properties file.
 
-3) Correr los siguientes comandos desde el root de la carpeta api-trainer:
+3) Run the next commands from the api-trainer root folder:
  * mvn clean install
  * java -jar target/trainer-0.0.1-SNAPSHOT.jar
 
-Finalmente, podemos probar la API de la siguiente manera (usando POSTMAN por ejemplo):
+Finally, we can test the API calling to the next endpoints (using POSTMAN for example):
 
 * GET localhost:8080/trainers
-   Devuelve una lista con todos los trainers creados.
+  It returns a list with all created trainers.
 
-* GET localhost:8080/trainers/id/{id} Devuelve el trainer solicitado según el id enviado.
-   Se chequea que exista el id enviado como parámetro, de lo contrario se devuelve el siguiente mensaje:
-   "Trainer not found with id {id}"
+* GET localhost:8080/trainers/id/{id} 
+  it returns a requested trainer according to the sent id.
+  The id is required. And if the id does not exist, the API responses with the next message:
+    "Trainer not found with id {id}"
 
-* POST localhost:8080/trainers Crea un nuevo trainer según los parámetros enviados en el body.
-   Ejemplo de body:
-   {
-    "email" : "juanperez@campgladiator.com",
-    "phone" : "5125125120",
-    "firstName": "Juan",
-    "lastName": "Perez"
-   }
+* POST localhost:8080/trainers 
+  It creates a new trainer according to the sent body parameters:
+    Body example:
+    {
+      "email" : "juanperez@campgladiator.com",
+      "phone" : "5125125120",
+      "firstName": "Juan",
+      "lastName": "Perez"
+    }
 
-   Se chequea que los parámetros enviados en el body no sean vacíos, de lo contrario envía los mensajes correspondientes:
-   {
-    "lastName": "Last name is Required",
-    "firstName": "First name is Required",
-    "phone": "no debe estar vacío",
-    "email": "Email is Required"
-   }
+   
+  All the body fields are requirement. The next messages can be sent if some field is empty or is missing:
+    {
+      "lastName": "Last name is Required",
+      "firstName": "First name is Required",
+      "phone": "no debe estar vacío",
+      "email": "Email is Required"
+    }
 
-   También chequea que el email no esté repetido. Si esto ocurre, el siguiente mensaje es enviado:
-   "A trainer with email address juanperez@campgladiator.com already exists."
+   Moreover, the email cannot be duplicated. If it occurs, API throws this message:
+     "A trainer with email address juanperez@campgladiator.com already exists."
