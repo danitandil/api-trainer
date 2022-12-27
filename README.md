@@ -48,3 +48,5 @@ Finally, we can test the API calling to the next endpoints (using POSTMAN for ex
 
    Moreover, the email cannot be duplicated. If it occurs, API throws this message:
      "A trainer with email address juanperez@campgladiator.com already exists."
+
+Swagger API documentation can be used going to /swagger-ui/index.html
