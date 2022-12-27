@@ -1,14 +1,11 @@
-package com.trainer.services;
+package com.trainer.service;
 
-import com.trainer.exceptions.EmailDuplicatedException;
-import com.trainer.exceptions.TrainerNotFound;
-import com.trainer.services.dto.TrainerInDTO;
-import com.trainer.mapper.TrainerInDTOtoTrainer;
+import com.trainer.exception.EmailDuplicatedException;
+import com.trainer.exception.TrainerNotFound;
 import com.trainer.persistence.entity.Trainer;
 import com.trainer.persistence.repository.TrainerRepository;
-import org.hibernate.service.spi.InjectService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,19 +16,14 @@ public class TrainerService {
     @Autowired
     private TrainerRepository repository;
 
-    @Autowired
-    private TrainerInDTOtoTrainer mapper;
-
-    public Trainer createTrainer(TrainerInDTO trainerInDTO) {
-        checkEmailDuplication(trainerInDTO.getEmail());
-        Trainer trainer = mapper.map(trainerInDTO);
-        return this.repository.save(trainer);
-    }
-
     private void checkEmailDuplication(String email) {
         if(this.repository.getByEmail(email).isPresent()){
             throw new EmailDuplicatedException("A trainer with email address " + email + " already exists.");
         }
+    }
+    public Trainer createTrainer(@Valid Trainer trainer) {
+        checkEmailDuplication(trainer.getEmail());
+        return this.repository.save(trainer);
     }
 
     public List<Trainer> findAll() {

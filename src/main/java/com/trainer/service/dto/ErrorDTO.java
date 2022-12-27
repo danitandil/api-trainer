@@ -1,4 +1,4 @@
-package com.trainer.services.dto;
+package com.trainer.service.dto;
 
 import lombok.Builder;
 import lombok.Data;

@@ -1,7 +1,7 @@
 package com.trainer.controller;
 
-import com.trainer.exceptions.EmailDuplicatedException;
-import com.trainer.exceptions.TrainerNotFound;
+import com.trainer.exception.EmailDuplicatedException;
+import com.trainer.exception.TrainerNotFound;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;

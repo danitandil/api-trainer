@@ -1,4 +1,4 @@
-package com.trainer.exceptions;
+package com.trainer.exception;
 
 import java.util.List;
 

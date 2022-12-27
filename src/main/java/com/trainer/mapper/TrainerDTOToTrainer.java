@@ -1,16 +1,16 @@
 package com.trainer.mapper;
 
-
 import com.trainer.persistence.entity.Trainer;
-import com.trainer.services.dto.TrainerInDTO;
+import com.trainer.service.dto.TrainerDTO;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TrainerInDTOtoTrainer implements IMapper<TrainerInDTO, Trainer>{
+public class TrainerDTOToTrainer implements IMapper<TrainerDTO, Trainer> {
 
     @Override
-    public Trainer map(TrainerInDTO in) {
+    public Trainer map(TrainerDTO in) {
         Trainer trainer = new Trainer();
+        trainer.setId(in.getId());
         trainer.setEmail(in.getEmail());
         trainer.setPhone(in.getPhone());
         trainer.setFirstName(in.getFirstName());
